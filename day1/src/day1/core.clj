@@ -1,24 +1,28 @@
-(ns day1.core
-    (:require [clojure.tools.trace :refer [trace]]))
+(ns day1.core)
 
 (defn parse-input
   [text]
-  ;(clojure.string/split-lines text)
-  ;(clojure.string/split text #"\s")
-  ;(Integer. (str \1))
-  ;(re-matches re s)
-  )
+  (->>
+    (clojure.string/split-lines text)
+    (map read-string)))
 
 (def input (parse-input (slurp "input.txt")))
 
 (defn part1
   []
-  nil)
+  (->> input
+       (apply +)))
 
 (defn part2
   []
-  nil)
+  (->> input
+       cycle
+       (reductions +)
+       (reduce (fn [acc x]
+                 (if (contains? acc x)
+                   (reduced x)
+                   (conj acc x)))
+               #{})))
 
-(do
-   (println (part1))
-   (println (part2)))
+(part1)
+(part2)
