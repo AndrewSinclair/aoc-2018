@@ -49,7 +49,7 @@
 (defn part1
   []
   (->> input
-       (reduce (fn [acc {:keys [id x y w h]}]
+       (reduce (fn [acc {:keys [x y w h]}]
                  (concat
                   acc
                   (for [i (range w)
